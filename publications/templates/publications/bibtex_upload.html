@@ -1,0 +1,64 @@
+{% extends 'publications/publication_list.html' %}
+{% load static %}
+
+{# ########################################### #}
+
+{% block html_head %}
+{{ block.super }}
+{{ form.media }}
+{% endblock %}
+
+{# NB: twoColumn #}
+
+{# ########################################### #}
+
+{% block page_title %}Publications - BibTeX upload{% endblock %}
+
+{# ########################################### #}
+
+{% block title %}Upload a BibTeX file{% endblock %}
+
+{# ########################################### #}
+
+{% block page_breadcrumbs %}
+{{ block.super }}
+    <span class="divider">&gt;</span>
+    Upload BibTeX
+{% endblock page_breadcrumbs %}
+
+{# ########################################### #}
+
+
+{% block content %}
+
+<ul class="pagenav">
+    <li>
+        <a href="{% url 'publications-add' %}">Add a new publication</a>
+    </li>
+</ul>
+
+{% if update_msg %}
+    <p>
+        {{ update_msg }}
+    </p>
+    <br><hr><br>
+{% endif %}
+
+
+<form enctype="multipart/form-data" action="." method="POST">{% csrf_token %}
+    <div class="form-container">
+        <table class="table-form">
+            {% include 'includes/form.html' %}
+            <tr class="submit-row">
+                <td>
+                    <input type="submit" value="Upload" class="save-btn">
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+
+{% endblock %}
+
+
+{# ########################################### #}

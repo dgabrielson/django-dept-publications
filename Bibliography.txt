@@ -1,0 +1,50 @@
+FORMATTING of BIBLIOGRAPHY ENTRIES
+
+Based on BibTeX ``plain''
+Source: [...]/bibtex/bst/base/plain.bst
+    [...] = /usr/local/texlive/2009/texmf-dist/
+/usr/local/texlive/2009/texmf-dist/doc/bibtex/base/btxbst.doc
+
+Multiple 'author's are always seperated by ' and ', we do the right thing.
+    2 authors: author1 and author2
+    3+ authors: author1, author2 and author3
+    May end 'and others', in which case 'others' becomes 'et~al.'
+
+
+**bold**
+*italic*
+{Case Protected}
+(in order of operations)
+
+=========================================================
+
+ARTICLE
+    required: 'author,title,journal,year'
+    optional: 'volume,number,pages,month,note,key'
+    note: most journals have a volume but no number
+
+{{ author }}.
+{{ title }}.
+*{{ journal }}*,
+{% if volume or number or pages %}
+    {{ volume }}
+    {% if number %}({{ number }}){% endif %}
+    {{ pages }}, {% endif %}
+{% if month %}{{ month }} {% endif %}{{ year }}.
+{{ note }}
+
+
+INCOLLECTION
+    required: author,title,booktitle,year
+    optional: editor,pages,organization,publisher,address,month,note,key
+
+{{ author }}{% ifnotequal author|slice:"-1:" "." %}.{% endifnotequal %}
+{{ title }}.
+In {% if editor %}{{ editor }}, {% endif %}*{{ booktitle }}*{ %if pages %}
+{{ pages }}{% endif %}.
+{% if publisher %}
+{{ publisher }}, {% if address %}
+{{ address }}, {% endif %}{% endif %}
+{{ year }}.
+{{ note }}
+

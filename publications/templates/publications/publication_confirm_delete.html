@@ -1,0 +1,44 @@
+{% extends 'publications/publication_list.html' %}
+
+{# ########################################### #}
+
+{% block html_head %}
+{{ block.super }}
+{{ form.media }}
+
+<script type="text/javascript">
+{{ form.javascript }}
+</script>
+{% endblock %}
+
+{# ########################################### #}
+
+{% block page_title %}Publications - Delete{% endblock %}
+
+{# ########################################### #}
+
+{% block title %}Delete a Publication{% endblock %}
+
+{# ########################################### #}
+
+{% block content %}
+
+<form enctype="multipart/form-data" action="" method="post" class="form">{% csrf_token %}
+    <p>
+        Are you <strong>sure</strong> you want to delete this publication?
+        <input type="submit" value="Yes, Delete">
+    </p>
+</form>
+
+{% endblock %}
+
+
+{# ########################################### #}
+
+{% block page_breadcrumbs %}
+{{ block.super }}
+    <span class="divider">&gt;</span>
+    Delete {{ object.Reference_Key }}
+{% endblock page_breadcrumbs %}
+
+{# ########################################### #}

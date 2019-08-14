@@ -1,0 +1,30 @@
+{# ########################################################## #}
+{# This template fragment expects to be have a `third_person` #}
+{# variable as a part of the context.                         #}
+{# This variable indicates whether it is *this* person        #}
+{# or a different person looking at the information           #}
+{# It is assumed that only people with the change_person      #}
+{# permission will be looking at other people's information.  #}
+{# ########################################################## #}
+
+{% load humanize %}
+
+
+        
+{% if person.publication_set.all %}
+    <h3>Publications</h3>
+    <p>
+        {% if third_person %}
+            This person has
+        {% else %}
+            You have
+        {% endif %}
+        {{ person.publication_set.all|length|apnumber }}
+        publication{{ person.publication_set.all|pluralize }}.
+    </p>
+    <p>
+        <a href="{% url 'publications-personal-list' slug=person.slug %}">
+            &rarr; Go to publications
+        </a>
+    </p>
+{% endif %}

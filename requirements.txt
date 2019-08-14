@@ -1,0 +1,5 @@
+
+#pybtex
+bibtexparser
+django-dept-directory
+#django-uofm

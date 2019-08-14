@@ -1,0 +1,40 @@
+{% extends 'publications/index.html' %}
+
+{# ########################################### #}
+
+{% block page_title %}Publications By Person{% endblock %}
+
+{# ########################################### #}
+
+{% block title %}Publications By Person{% endblock %}
+
+{# ########################################### #}
+
+{% block content %}
+
+    {% if person_list %}
+        <ul class="simple">
+            {% for person in person_list %}
+                <li>
+                    <a href="{% url 'publications-personal-list' person.slug %}">
+                        {{ person }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        Nobody has publications.
+    {% endif %}
+
+
+{% endblock %}
+
+
+{# ########################################### #}
+
+{% block page_breadcrumbs %}
+    <span class="divider">&gt;</span>
+    By person
+{% endblock page_breadcrumbs %}
+
+{# ########################################### #}

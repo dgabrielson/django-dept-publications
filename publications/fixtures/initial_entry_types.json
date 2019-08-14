@@ -1,0 +1,184 @@
+[
+{
+    "model": "publications.entry_type",
+    "pk": "article",
+    "fields": {
+        "Active": true,
+        "Last_Updated": "2011-11-08T16:14:48Z",
+        "Description": "An article from a journal or magazine.",
+        "Required_Fields": "author,title,journal,year",
+        "Optional_Fields": "volume,number,pages,month,note,key",
+        "html_Template": "{{ author }}\r\n({{ year }}{% if month %}, {{ month }}{% endif %}).\r\n{% if URL %}<a href=\"{{ URL }}\" target=\"_blank\">{{ title }}</a>{% else %}{{ title }}{% endif %}{% if title|last != '.' %}.{% endif %}\r\n<i>{{ journal }}{% if volume %} {{ volume }}{% endif %}</i>{% if number %}\r\n({{ number }}){% endif %}{% if pages %},\r\n{{ pages }}{% endif %}.\r\n{{ note }}",
+        "latex_Template": "",
+        "rtf_Template": ""
+    }
+},
+{
+    "model": "publications.entry_type",
+    "pk": "book",
+    "fields": {
+        "Active": true,
+        "Last_Updated": "2011-11-08T16:26:39Z",
+        "Description": "A book with an explicit publisher.",
+        "Required_Fields": "author/editor,title,publisher,year",
+        "Optional_Fields": "volume,series,address,edition,month,note,key,pages",
+        "html_Template": "{% if author %}{{ author }}{% else %}{% if editor %}{{ editor }} (Ed.){% endif %}{% endif %}\r\n({{ year }}{% if month %}, {{ month }}{% endif %}).\r\n{{ title }}{% if edition %}({{ edition }} ed.){% endif %}{% if volume %},\r\n   Volume {{ volume }}{% if series %} of {% endif %}\r\n{% else %}{% if number %}.\r\n      Number {{ number }}{% if series %} in {% endif %}{% endif %}{% endif %}{% if series %}{{ series }}{% endif %}.\r\n{% if address %}{{ address }}: {% endif %}\r\n{{ publisher }}.",
+        "latex_Template": "",
+        "rtf_Template": ""
+    }
+},
+{
+    "model": "publications.entry_type",
+    "pk": "booklet",
+    "fields": {
+        "Active": true,
+        "Last_Updated": "2011-11-03T14:37:53Z",
+        "Description": "A work that is printed and bound, but without a named publisher or sponsoring institution.",
+        "Required_Fields": "title",
+        "Optional_Fields": "author,howpublished,address,month,year,note,key",
+        "html_Template": null,
+        "latex_Template": null,
+        "rtf_Template": null
+    }
+},
+{
+    "model": "publications.entry_type",
+    "pk": "inbook",
+    "fields": {
+        "Active": true,
+        "Last_Updated": "2012-02-22T14:32:31Z",
+        "Description": "A part of a book, usually untitled. May be a chapter (or section or whatever) and/or a range of pages.",
+        "Required_Fields": "author/editor,title,chapter/pages,publisher,year",
+        "Optional_Fields": "volume,series,address,edition,month,note,key",
+        "html_Template": "{% if author %}{{ author }}{% else %}\r\n{% if editor %}{{ editor }} (Ed.){% endif %}{% endif %}\r\n({{ year }}{% if month %}, {{ month }}{% endif %}).\r\n<i>{% if URL %}<a href=\"{{ URL }}\" target=\"_blank\">{{ title }}</a>{% else %}{{ title }}{% endif %}</i>{% if chapter %}, Chapter {{ chapter }}{% endif %}{% if pages %}, pp. {{ pages }}{% endif %}.\r\n{{ publisher }}.\r\n",
+        "latex_Template": "",
+        "rtf_Template": ""
+    }
+},
+{
+    "model": "publications.entry_type",
+    "pk": "incollection",
+    "fields": {
+        "Active": true,
+        "Last_Updated": "2012-05-29T19:19:24Z",
+        "Description": "A part of a book having its own title.",
+        "Required_Fields": "author,title,booktitle,year",
+        "Optional_Fields": "editor,pages,organization,publisher,address,month,note,key",
+        "html_Template": "{{ author }}.\r\n{{ title }}.\r\nIn {% if editor %}{{ editor }}, {% endif %}<i>{{ booktitle }}</i>{% if pages %}\r\n{{ pages }}{% endif %}.\r\n{% if publisher %}\r\n{{ publisher }}, {% if address %}\r\n{{ address }}, {% endif %}{% endif %}\r\n{{ year }}.\r\n{{ note }}",
+        "latex_Template": "",
+        "rtf_Template": ""
+    }
+},
+{
+    "model": "publications.entry_type",
+    "pk": "inproceedings",
+    "fields": {
+        "Active": true,
+        "Last_Updated": "2012-02-29T16:53:22Z",
+        "Description": "An article in a conference proceedings.",
+        "Required_Fields": "author,title,booktitle,year",
+        "Optional_Fields": "editor,series,pages,organization,publisher,address,month,note,key",
+        "html_Template": "{{ author }}\r\n({{ year }}{% if month %}, {{ month }}{% endif %}).\r\n{% if URL %}<a href=\"{{ URL }}\" target=\"_blank\">{{ title }}</a>{% else %}{{ title }}{% endif %}{% if title|last != '.' %}.{% endif %}\r\nIn {% if editor %}{{ editor }}, {% endif %}<i>{{ booktitle }}</i>{% if pages %}\r\npp. {{ pages }}{% endif %}.\r\n{% if publisher %}\r\n{{ publisher }}, {% if address %}\r\n{{ address }}, {% endif %}{% endif %}\r\n",
+        "latex_Template": "",
+        "rtf_Template": ""
+    }
+},
+{
+    "model": "publications.entry_type",
+    "pk": "manual",
+    "fields": {
+        "Active": true,
+        "Last_Updated": "2011-11-03T14:37:53Z",
+        "Description": "Technical documentation.",
+        "Required_Fields": "title",
+        "Optional_Fields": "author,organization,address,edition,month,year,note,key",
+        "html_Template": null,
+        "latex_Template": null,
+        "rtf_Template": null
+    }
+},
+{
+    "model": "publications.entry_type",
+    "pk": "mastersthesis",
+    "fields": {
+        "Active": true,
+        "Last_Updated": "2011-11-03T14:37:53Z",
+        "Description": "A Master's thesis.",
+        "Required_Fields": "author,title,school,year",
+        "Optional_Fields": "address,month,note,key",
+        "html_Template": null,
+        "latex_Template": null,
+        "rtf_Template": null
+    }
+},
+{
+    "model": "publications.entry_type",
+    "pk": "misc",
+    "fields": {
+        "Active": true,
+        "Last_Updated": "2012-04-02T14:53:54Z",
+        "Description": "For use when nothing else fits.",
+        "Required_Fields": "",
+        "Optional_Fields": "author,title,howpublished,month,year,note,key",
+        "html_Template": "{{ author }}\r\n({{ year }}{% if month %}, {{ month }}{% endif %}).\r\n{% if URL %}<a href=\"{{ URL }}\" target=\"_blank\">{{ title }}</a>{% else %}{{ title }}{% endif %}{% if title|last != '.' %}.{% endif %}\r\n{% if howpublished %}{{ howpublished }}{% if howpublished|last != '.' %}.{% endif %}{% endif %}",
+        "latex_Template": "",
+        "rtf_Template": ""
+    }
+},
+{
+    "model": "publications.entry_type",
+    "pk": "phdthesis",
+    "fields": {
+        "Active": true,
+        "Last_Updated": "2018-05-29T15:10:11.360Z",
+        "Description": "A Ph.D. thesis.",
+        "Required_Fields": "author,title,school,year",
+        "Optional_Fields": "address,month,note,key",
+        "html_Template": "{{ author }}\r\n({{ year }}{% if month %}, {{ month }}{% endif %}).\r\n<em>{% if URL %}<a href=\"{{ URL }}\" target=\"_blank\">{{ title }}</a>{% else %}{{ title }}{% endif %}{% if title|last != '.' %}.{% endif %}</em>\r\nPh.&nbsp;D.&nbsp;thesis, \r\n{{ school }}{% if address %}, {{ address }}{% endif %}.\r\n{{ note }}",
+        "latex_Template": "",
+        "rtf_Template": ""
+    }
+},
+{
+    "model": "publications.entry_type",
+    "pk": "proceedings",
+    "fields": {
+        "Active": true,
+        "Last_Updated": "2018-05-29T15:02:57.065Z",
+        "Description": "The proceedings of a conference.",
+        "Required_Fields": "title,year",
+        "Optional_Fields": "editor,publisher,organization,address,month,note,key",
+        "html_Template": "{% if not editor %}{{ organization }}\r\n{% else %}{{ editor }} (Ed.)\r\n{% endif %}\r\n({{ year }}{% if month %}, {{ month }}{% endif %}).\r\n<em>{% if URL %}<a href=\"{{ URL }}\" target=\"_blank\">{{ title }}</a>{% else %}{{ title }}{% endif %}{% if title|last != '.' %}.{% endif %}</em>\r\n{% if number %}\r\n    Number {{ number }}{% if series %} in {{ series}}{% endif %}.\r\n{% elif volume %}\r\n    Volume {{ volume }}{% if series %} of <em>{{ series}}</em>{% endif %}.\r\n{% endif %}\r\n{% if address %}{{ address }}.{% endif %}\r\n{{ organization }}\r\n{% if publisher %}{{ publisher }}:{% endif %}\r\n{{ note }}",
+        "latex_Template": "",
+        "rtf_Template": ""
+    }
+},
+{
+    "model": "publications.entry_type",
+    "pk": "techreport",
+    "fields": {
+        "Active": true,
+        "Last_Updated": "2018-05-29T14:37:25.936Z",
+        "Description": "A report published by a school or other institution, usually numbered within a series.",
+        "Required_Fields": "author,title,institution,year",
+        "Optional_Fields": "type,number,address,month,note,key",
+        "html_Template": "{{ author }}\r\n({{ year }}{% if month %}, {{ month }}{% endif %}).\r\n{% if URL %}<a href=\"{{ URL }}\" target=\"_blank\">{{ title }}</a>{% else %}{{ title }}{% endif %}{% if title|last != '.' %}.{% endif %}\r\n{% if type %}{{ type }}{% else %}Technical Report{% endif %}{% if number %} {{ number }}{% endif %}.\r\n{{ institution }}{% if address %}{{ address}}{% endif %}.\r\n{{ note }}",
+        "latex_Template": "",
+        "rtf_Template": ""
+    }
+},
+{
+    "model": "publications.entry_type",
+    "pk": "unpublished",
+    "fields": {
+        "Active": true,
+        "Last_Updated": "2018-05-29T14:20:19.051Z",
+        "Description": "A document having an author and title, but not formally published.",
+        "Required_Fields": "author,title,note",
+        "Optional_Fields": "month,year,key",
+        "html_Template": "{{ author }}{% if year %}\r\n({{ year }}{% if month %}, {{ month }}{% endif %}){% endif %}.\r\n{% if URL %}<a href=\"{{ URL }}\" target=\"_blank\">{{ title }}</a>{% else %}{{ title }}{% endif %}{% if title|last != '.' %}.{% endif %}\r\n{{ note }}",
+        "latex_Template": "",
+        "rtf_Template": ""
+    }
+}
+]

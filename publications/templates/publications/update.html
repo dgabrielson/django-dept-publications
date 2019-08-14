@@ -1,0 +1,106 @@
+{% extends 'publications/publication_list.html' %}
+
+{# ########################################### #}
+
+{% block html_head %}
+{{ block.super }}
+{{ form.media }}
+
+<script type="text/javascript">
+{{ form.javascript }}
+</script>
+{% endblock %}
+
+{# ########################################### #}
+
+{% block page_title %}Publications - Update{% endblock %}
+
+{# ########################################### #}
+
+{% block title %}Update a Publication{% endblock %}
+
+{# ########################################### #}
+
+{% block body_params %}onLoad="publicationsOnLoad();"{% endblock %}
+
+{% block head_jquery_ready_extras %}
+    publicationsOnLoad();
+{% endblock %}
+
+{# ########################################### #}
+
+{% block content %}
+
+<ul class="pagenav">
+    <li>
+        <a href="{% url 'publications-add' %}">Add a new publication</a>
+    </li>
+</ul>
+
+{% if update_msg %}
+    <p>
+        {{ update_msg }}
+    </p>
+    <br><hr><br>
+{% endif %}
+
+
+<form action="." method="POST">{% csrf_token %}
+    {% if form_errors %}
+        <ul class="errorlist">
+            {% for error in form_errors %}
+                <li>{{ error }}
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <table class="table-form">
+
+        {#{  form.as_table }#}
+        {% comment %}
+        <!-- PublicationForm starts -->
+        {% for field in form %}
+            <tr id="row-{{ field.html_name }}">
+                <th>
+                    {{ field.label_tag }}
+                </th>
+                <td>
+                    {% if field.errors %}
+                        <ul class="errorlist" id="errors-{{ field.html_name }}">
+                            {% for error in field.errors %}
+                                <li>{{ error }}
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {{ field }}
+                    {% if field.help_text %}<br>
+                    <span id="help-text-{{ field.html_name }}" class="help">{{ field.help_text }}</span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        {% endcomment %}
+        {% include 'includes/form.html' %}
+        <!-- End of PublicationForm -->
+        <tr class="submit-row">
+            <td>
+                <input type="submit" value="Update">
+            </td>
+        </tr>
+
+    </table>
+
+</form>
+
+{% endblock %}
+
+
+{# ########################################### #}
+
+{% block page_breadcrumbs %}
+{{ block.super }}
+    <span class="divider">&gt;</span>
+    Update {{ object.Reference_Key }}
+{% endblock page_breadcrumbs %}
+
+{# ########################################### #}

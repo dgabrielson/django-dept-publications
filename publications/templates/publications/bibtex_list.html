@@ -1,0 +1,16 @@
+<html>
+<head>
+<title>Publications - {{ person }} (BibTeX)</title>
+</head>
+
+<body>
+<pre>
+{% for pub in publication_list %}
+
+{{ pub.as_bibtex }}
+
+{% endfor %}
+</pre>
+</body>
+</html>
+

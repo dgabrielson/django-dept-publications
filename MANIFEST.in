@@ -1,0 +1,8 @@
+include LICENSE.txt
+include requirements.txt
+recursive-include publications/fixtures *
+#recursive-include publications/static *
+recursive-include publications/templates *
+
+# added by check_manifest.py
+include *.txt

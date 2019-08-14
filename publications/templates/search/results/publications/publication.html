@@ -1,0 +1,16 @@
+{# search results for a publication #}
+{# context: result #}
+{# use div classes: link, extra info #}
+
+
+<div class="link">
+    &ldquo;{{ result.object.title }}&rdquo; &mdash;
+
+    <a href="{% url 'publications-personal-list' slug=result.object.Owner.slug %}">
+        publication by
+        {{ result.object.Owner }}
+    </a>
+</div>
+<div class="extra-info">
+    Score: {{ result.score }}
+</div>

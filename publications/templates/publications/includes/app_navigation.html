@@ -1,0 +1,31 @@
+{% load people_tags %}
+
+{% url 'publications-main' as link_url %}
+{% if link_url %}
+    <a href="{{ link_url }}"{% if link_url in current_url %} class="selected"{% endif %}>
+        Publications
+    </a>
+    {% with person=user|get_person %}
+        {% if link_url in current_url and "publications" in person.flags.slugs %}
+            <ul class="menu">
+                {% url 'publications-add' as link_url %}
+                {% if link_url %}
+                <li>
+                    <a href="{{ link_url }}"{% if link_url in current_url %} class="selected"{% endif %}>
+                        Add a New Publication
+                    </a>
+                </li>
+                {% endif %}
+    
+                {% url 'publications-bibtex-upload' as link_url %}
+                {% if link_url %}
+                <li>
+                    <a href="{{ link_url }}"{% if link_url in current_url %} class="selected"{% endif %}>
+                        Upload a BibTeX file
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+{% endif %}

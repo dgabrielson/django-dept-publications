@@ -1,0 +1,119 @@
+{% extends 'publications/index.html' %}
+{% load people_tags static %}
+
+{# ########################################### #}
+
+{% block page_title %}Publications{% if person %} - {{ person }}{% endif %}{% endblock %}
+
+{# ########################################### #}
+
+{% block title %}{% if person %}Publications by {{ person }}{% else %}Recent Publications{% endif %}{% endblock %}
+
+{# ########################################### #}
+
+{% block content %}
+
+<ul class="pagenav">
+    {% if person and person.slug %}
+        {% if publication_list %}
+        <li>
+            <a href="{% url 'publications-personal-bibtex' person.slug %}">
+                As BibTeX
+            </a>
+        </li>
+        {% endif %}
+        <li>
+            <a href="{{ person.get_absolute_url }}">
+                {{ person }}'{% if person.cn|last|lower != 's' %}s{% endif %} info page
+            </a>
+        </li>
+        {% if user.is_superuser %}
+            <li>
+                <a href="{% url 'publications-bibtex-upload-for-person' slug=person.slug %}">
+                    Upload BibTeX for this person
+                </a>
+            </li>
+        {% elif user.username == person.username %}
+            <li>
+                <a href="{% url 'publications-bibtex-upload' %}">
+                    Upload BibTeX
+                </a>
+            </li>
+        {% endif %}
+    {% else %}
+        <li>
+            <a href="{% url 'publications-people-list' %}">
+                Publications by person
+            </a>
+        </li>
+    {% endif %}
+</ul>
+
+    {% if publication_list %}
+        {% if since_year %}
+            <p>
+                Publications from selected department members since {{ since_year }}.
+            </p>
+        {% endif %}
+        <ul class="publicationlist">
+            {% with current_person=user|get_person %}
+                {% for pub in publication_list %}
+                    <li class="{% if not pub.Active %}not-active {% endif %}{% if not pub.public %}not-public {% endif %}">
+                        {{ pub.as_html }}
+                        {% if current_person == pub.Owner %}
+                            <span class="pub-actions">
+
+                                <a href="{% url 'publications-edit' pub.Reference_Key %}">
+                                    <button title="edit">
+                                        <img src="{% static 'img/icons/file-text.svg' %}">
+                                    </button>
+                                </a>
+
+                                <a href="{% url 'publications-delete' pub.Reference_Key %}">
+                                    <button title="delete">
+                                        <img src="{% static 'img/icons/trashcan.svg' %}">
+                                    </button>
+                                </a>
+                                {% if not pub.Active %}
+                                    (not active)
+                                {% endif %}
+                            </span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            {% endwith %}
+        </ul>
+    {% else %}
+        {% if person %}
+        {{ person }} has no known publications here.
+        {% endif %}
+    {% endif %}
+
+
+{% endblock %}
+
+
+{# ########################################### #}
+
+{% block page_breadcrumbs %}
+{{ block.super }}
+    {% if person %}
+        <span class="divider">&gt;</span>
+
+        <a href="{% url 'publications-people-list' %}">
+            By person
+        </a>
+
+        <span class="divider">&gt;</span>
+        {% url 'publications-personal-list' slug=person.slug as page_url %}
+        {% if page_url != request.path %}
+            <a href="{{ page_url }}">
+                {{ person }}
+            </a>
+        {% else %}
+            {{ person }}
+        {% endif %}
+    {% endif %}
+{% endblock page_breadcrumbs %}
+
+{# ########################################### #}
